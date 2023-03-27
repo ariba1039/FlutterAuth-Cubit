@@ -1,0 +1,58 @@
+name: flutter_flex
+description: A new Flutter project.
+
+
+publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+
+
+version: 1.0.0+1
+
+environment:
+  sdk: '>=2.19.3 <3.0.0'
+
+# To automatically upgrade your package dependencies to the latest versions
+# consider running `flutter pub upgrade --major-versions`.
+
+# To see which dependencies have newer
+# versions available, run `flutter pub outdated`.
+dependencies:
+  flutter:
+    sdk: flutter
+
+
+  # Dependencies
+  cupertino_icons: ^1.0.2
+  flutter_bloc: ^8.1.2
+  bot_toast: ^4.0.3
+  equatable: ^2.0.3
+
+
+
+  # firebase
+  firebase_core: ^2.7.1
+  firebase_auth: ^4.2.10
+
+  # social auth
+  google_sign_in: ^6.0.2
+  sign_in_with_apple: ^4.3.0
+  flutter_facebook_auth: ^5.0.8
+
+
+
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+
+  # Dev Dependencies
+#  flutter_lints: ^2.0.0
+
+
+
+# The following section is specific to Flutter packages.
+flutter:
+
+  generate: true
+  uses-material-design: true
+
