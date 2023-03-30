@@ -2,6 +2,7 @@ import 'package:bot_toast/bot_toast.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_flex/cubit/register/register_cubit.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 import 'cubit/auth/auth_cubit.dart';
@@ -13,7 +14,6 @@ import 'utils/theme/light_theme.dart';
 class App extends StatelessWidget {
   const App({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MultiRepositoryProvider(
@@ -27,16 +27,21 @@ class App extends StatelessWidget {
       ],
       child: MultiBlocProvider(
         providers: [
+          BlocProvider<AuthCubit>(
+            create: (context) => AuthCubit(
+              authRepository: context.read<AuthRepository>(),
+            ),
+          ),
           BlocProvider<LoginCubit>(
             create: (context) => LoginCubit(
               authRepository: context.read<AuthRepository>(),
             ),
           ),
-          BlocProvider<AuthCubit>(
-            create: (context) => AuthCubit(
+          BlocProvider<RegisterCubit>(
+            create: (context) => RegisterCubit(
               authRepository: context.read<AuthRepository>(),
             ),
-          )
+          ),
         ],
         child: MaterialApp(
           title: 'Flutter Flex',

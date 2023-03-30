@@ -1,18 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_flex/cubit/login/login_cubit.dart';
-import 'package:flutter_flex/pages/register_page.dart';
+import 'package:flutter_flex/cubit/register/register_cubit.dart';
 import 'package:flutter_flex/utils/auth_utils.dart';
 import 'package:flutter_flex/utils/utils.dart';
 
-class LoginPage extends StatefulWidget {
-  LoginPage({Key? key}) : super(key: key);
+import 'login_page.dart';
+
+class RegisterPage extends StatefulWidget {
+  RegisterPage({Key? key}) : super(key: key);
 
   @override
-  State<LoginPage> createState() => _LoginPageState();
+  State<RegisterPage> createState() => _RegisterPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _RegisterPageState extends State<RegisterPage> {
   final _formKey = GlobalKey<FormState>();
 
   final TextEditingController emailController = TextEditingController();
@@ -27,17 +28,17 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
-    LoginCubit loginCubit = context.read<LoginCubit>();
+    RegisterCubit registerCubit = context.read<RegisterCubit>();
     return Scaffold(
       appBar: AppBar(title: Text('Firebase Auth')),
-      body: BlocListener<LoginCubit, LoginState>(
+      body: BlocListener<RegisterCubit, RegisterState>(
         listener: (context, state) {
-          if (state.status == LoginStatus.submissionInProgress) {
+          if (state.status == RegisterStatus.submissionInProgress) {
             Utils.showLoader();
-          } else if (state.status == LoginStatus.submissionSuccess) {
+          } else if (state.status == RegisterStatus.submissionSuccess) {
             Utils.removeLoader();
-            Utils.showSnackBar(context, 'Logged in successfully');
-          } else if (state.status == LoginStatus.submissionFailure) {
+            Utils.showSnackBar(context, 'Registered successfully');
+          } else if (state.status == RegisterStatus.submissionFailure) {
             Utils.removeLoader();
             if (state.errorMessage == 'Null check operator used on a null value') {
               return;
@@ -77,58 +78,27 @@ class _LoginPageState extends State<LoginPage> {
                       child: ElevatedButton(
                         onPressed: () {
                           if (_formKey.currentState!.validate()) {
-                            loginCubit.logInWithEmailAndPassword(
+                            registerCubit.registerWithEmailAndPassword(
                               email: emailController.text,
                               password: passwordController.text,
                             );
                           }
                         },
-                        child: Text('Login'),
+                        child: Text('Register'),
                       ),
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Text('New User? '),
+                        Text('Already have an account?'),
                         TextButton(
                           style: TextButton.styleFrom(padding: EdgeInsets.zero),
-                          child: Text('Register'),
+                          child: Text('Login'),
                           onPressed: () {
-                            Navigator.push(context, MaterialPageRoute(builder: (_) => RegisterPage()));
+                            Navigator.pop(context);
                           },
                         ),
                       ],
-                    ),
-                    Text('Or'),
-                    SizedBox(height: 14),
-                    SizedBox(
-                      width: double.infinity,
-                      child: OutlinedButton(
-                        onPressed: () {
-                          context.read<LoginCubit>().loginAnonymously();
-                        },
-                        child: Text('Anonymous Login'),
-                      ),
-                    ),
-                    SizedBox(height: 14),
-                    SizedBox(
-                      width: double.infinity,
-                      child: OutlinedButton(
-                        onPressed: () {
-                          context.read<LoginCubit>().loginWithGoogle();
-                        },
-                        child: Text('Login with Google'),
-                      ),
-                    ),
-                    SizedBox(height: 14),
-                    SizedBox(
-                      width: double.infinity,
-                      child: OutlinedButton(
-                        onPressed: () {
-                          context.read<LoginCubit>().loginWithApple();
-                        },
-                        child: Text('Login with Apple'),
-                      ),
                     ),
                   ],
                 ),

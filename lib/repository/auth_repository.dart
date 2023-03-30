@@ -57,7 +57,7 @@ class AuthRepository {
   Future<void> loginAnonymously() async {
     try {
       await _firebaseAuth.signInAnonymously();
-    } on FirebaseAuthException catch (e) {
+    } on FirebaseAuthException catch (_) {
       throw LoginAnonymousFailure();
     } on SocketException catch (_) {
       throw LoginAnonymousFailure('Please check your internet connection, and try again');
@@ -108,7 +108,7 @@ class AuthRepository {
   }
 
   /// Sign Up
-  Future<void> signUp({required String email, required String password}) async {
+  Future<void> registerWithEmailAndPassword({required String email, required String password}) async {
     try {
       await _firebaseAuth.createUserWithEmailAndPassword(
         email: email,

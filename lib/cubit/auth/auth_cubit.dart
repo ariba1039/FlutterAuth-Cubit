@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:developer';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
@@ -13,6 +14,7 @@ class AuthCubit extends Cubit<AuthState> {
 
   AuthCubit({required this.authRepository}) : super(AuthState.unknown()) {
     _userSubscription = authRepository.user.listen((UserModel user) {
+      log('auth cubit called');
       if (user.isNotEmpty) {
         emit(state.copyWith(authStatus: AuthStatus.authenticated, user: user));
       } else {
