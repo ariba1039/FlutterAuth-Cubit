@@ -1,9 +1,11 @@
+import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_flex/cubit/register/register_cubit.dart';
 import 'package:flutter_flex/utils/auth_utils.dart';
 import 'package:flutter_flex/utils/utils.dart';
 
+import '../utils/animations/fade_animation.dart';
 import 'login_page.dart';
 
 class RegisterPage extends StatefulWidget {
@@ -50,57 +52,59 @@ class _RegisterPageState extends State<RegisterPage> {
           margin: EdgeInsets.symmetric(horizontal: 16),
           child: SingleChildScrollView(
             child: Center(
-              child: Form(
-                key: _formKey,
-                child: Column(
-                  children: [
-                    SizedBox(height: 20),
-                    TextFormField(
-                      controller: emailController,
-                      validator: (val) => AuthUtils.validateEmail(val),
-                      decoration: InputDecoration(
-                        hintText: 'john@gmail.com',
-                        labelText: 'Email',
-                      ),
-                    ),
-                    SizedBox(height: 20),
-                    TextFormField(
-                      controller: passwordController,
-                      validator: (val) => AuthUtils.validatePassword(val),
-                      decoration: InputDecoration(
-                        hintText: '********',
-                        labelText: 'Password',
-                      ),
-                    ),
-                    SizedBox(height: 20),
-                    SizedBox(
-                      width: double.infinity,
-                      child: ElevatedButton(
-                        onPressed: () {
-                          if (_formKey.currentState!.validate()) {
-                            registerCubit.registerWithEmailAndPassword(
-                              email: emailController.text,
-                              password: passwordController.text,
-                            );
-                          }
-                        },
-                        child: Text('Register'),
-                      ),
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text('Already have an account?'),
-                        TextButton(
-                          style: TextButton.styleFrom(padding: EdgeInsets.zero),
-                          child: Text('Login'),
-                          onPressed: () {
-                            Navigator.pop(context);
-                          },
+              child: FadeInUpAnimation(
+                child: Form(
+                  key: _formKey,
+                  child: Column(
+                    children: [
+                      SizedBox(height: 20),
+                      TextFormField(
+                        controller: emailController,
+                        validator: (val) => AuthUtils.validateEmail(val),
+                        decoration: InputDecoration(
+                          hintText: 'john@gmail.com',
+                          labelText: 'Email',
                         ),
-                      ],
-                    ),
-                  ],
+                      ),
+                      SizedBox(height: 20),
+                      TextFormField(
+                        controller: passwordController,
+                        validator: (val) => AuthUtils.validatePassword(val),
+                        decoration: InputDecoration(
+                          hintText: '********',
+                          labelText: 'Password',
+                        ),
+                      ),
+                      SizedBox(height: 20),
+                      SizedBox(
+                        width: double.infinity,
+                        child: ElevatedButton(
+                          onPressed: () {
+                            if (_formKey.currentState!.validate()) {
+                              registerCubit.registerWithEmailAndPassword(
+                                email: emailController.text,
+                                password: passwordController.text,
+                              );
+                            }
+                          },
+                          child: Text('Register'),
+                        ),
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text('Already have an account?'),
+                          TextButton(
+                            style: TextButton.styleFrom(padding: EdgeInsets.zero),
+                            child: Text('Login'),
+                            onPressed: () {
+                              Navigator.pop(context);
+                            },
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),

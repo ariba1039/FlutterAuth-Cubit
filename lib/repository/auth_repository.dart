@@ -86,6 +86,8 @@ class AuthRepository {
     }
   }
 
+  /// =================================== Apple ===================================
+
   Future<void> loginWithApple() async {
     try {
       final appleCredential = await SignInWithApple.getAppleIDCredential(
@@ -107,7 +109,7 @@ class AuthRepository {
     }
   }
 
-  /// Sign Up
+  /// =================================== Register ===================================
   Future<void> registerWithEmailAndPassword({required String email, required String password}) async {
     try {
       await _firebaseAuth.createUserWithEmailAndPassword(

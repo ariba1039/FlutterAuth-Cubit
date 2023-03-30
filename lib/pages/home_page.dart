@@ -9,31 +9,34 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Home'),
-        centerTitle: true,
-        actions: [
-          IconButton(
-            onPressed: () {
-              Navigator.push(context, MaterialPageRoute(builder: (_) => ProfilePage()));
-            },
-            icon: Icon(Icons.person_outline),
-          ),
-          IconButton(
-            onPressed: () {
-              context.read<AuthCubit>().signOut();
-            },
-            icon: Icon(Icons.logout_outlined),
-          ),
-        ],
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text('Firebase login with Bloc'),
+    return WillPopScope(
+      onWillPop: () async => false,
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text('Home'),
+          centerTitle: true,
+          actions: [
+            IconButton(
+              onPressed: () {
+                Navigator.push(context, MaterialPageRoute(builder: (_) => ProfilePage()));
+              },
+              icon: Icon(Icons.person_outline),
+            ),
+            IconButton(
+              onPressed: () {
+                context.read<AuthCubit>().signOut();
+              },
+              icon: Icon(Icons.logout_outlined),
+            ),
           ],
+        ),
+        body: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text('Firebase login with Bloc'),
+            ],
+          ),
         ),
       ),
     );
