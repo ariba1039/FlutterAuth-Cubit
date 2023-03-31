@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">AskThem</string>
+    <string name="facebook_app_id">498903985791046</string>
+    <string name="facebook_client_token">2b210556a437e9ed35e37d3c9be58cea</string>
+</resources>

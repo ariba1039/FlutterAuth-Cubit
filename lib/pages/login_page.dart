@@ -45,7 +45,7 @@ class _LoginPageState extends State<LoginPage> {
               Utils.showSnackBar(context, 'Logged in successfully');
             } else if (state.status == LoginStatus.submissionFailure) {
               Utils.removeLoader();
-              if (state.errorMessage == 'Null check operator used on a null value') {
+              if (state.errorMessage == 'Null check operator used on a null value' || state.errorMessage == 'cancelled') {
                 return;
               }
               Utils.showSnackBar(context, state.errorMessage);
@@ -127,6 +127,16 @@ class _LoginPageState extends State<LoginPage> {
                               context.read<LoginCubit>().loginWithGoogle();
                             },
                             child: Text('Login with Google'),
+                          ),
+                        ),
+                        SizedBox(height: 14),
+                        SizedBox(
+                          width: double.infinity,
+                          child: OutlinedButton(
+                            onPressed: () {
+                              context.read<LoginCubit>().loginWithFacebook();
+                            },
+                            child: Text('Login with Facebook'),
                           ),
                         ),
                         SizedBox(height: 14),

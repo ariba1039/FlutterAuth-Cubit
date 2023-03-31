@@ -1,6 +1,7 @@
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_flex/exceptions/apple_failure.dart';
+import 'package:flutter_flex/exceptions/facebook_failure.dart';
 
 import '../../exceptions/anonymous_failure.dart';
 import '../../exceptions/google_failure.dart';
@@ -43,6 +44,23 @@ class LoginCubit extends Cubit<LoginState> {
       await authRepository.loginWithGoogle();
       emit(state.copyWith(status: LoginStatus.submissionSuccess));
     } on LogInWithGoogleFailure catch (e) {
+      emit(
+        state.copyWith(
+          errorMessage: e.message,
+          status: LoginStatus.submissionFailure,
+        ),
+      );
+    } catch (_) {
+      emit(state.copyWith(status: LoginStatus.submissionFailure));
+    }
+  }
+
+  Future<void> loginWithFacebook() async {
+    emit(state.copyWith(status: LoginStatus.submissionInProgress));
+    try {
+      await authRepository.loginWithFacebook();
+      emit(state.copyWith(status: LoginStatus.submissionSuccess));
+    } on LogInWithFacebookFailure catch (e) {
       emit(
         state.copyWith(
           errorMessage: e.message,

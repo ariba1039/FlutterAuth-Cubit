@@ -3,6 +3,7 @@
 <plist version="1.0">
 <dict>
 
+
     <!-- Google Sign-in Section -->
     <key>CFBundleURLTypes</key>
     <array>
@@ -11,12 +12,33 @@
     		<string>Editor</string>
     		<key>CFBundleURLSchemes</key>
     		<array>
-    			<string>com.googleusercontent.apps.657720779325-m5cusp7edm9mt29qtedtl0f8d2r81f7j</string>
+    		    <!-- Facebook app id -->
+    		    <string>fb498903985791046</string>
+
+                <!-- Copied from GoogleService-Info.plist key REVERSED_CLIENT_ID -->
+				<string>com.googleusercontent.apps.657720779325-m5cusp7edm9mt29qtedtl0f8d2r81f7j</string>
     		</array>
     	</dict>
     </array>
     <!-- End of the Google Sign-in Section -->
 
+
+    <!-- Start of Facebook Section -->
+    <key>FacebookAppID</key>
+    <string>498903985791046</string>
+    <key>FacebookClientToken</key>
+    <string>2b210556a437e9ed35e37d3c9be58cea</string>
+    <key>FacebookDisplayName</key>
+    <string>FlutterAuth Cubit</string>
+    <key>LSApplicationQueriesSchemes</key>
+    <array>
+      <string>fbapi</string>
+      <string>fb-messenger-share-api</string>
+    </array>
+    <!-- End of the Facebook Section -->
+
+	<key>CADisableMinimumFrameDurationOnPhone</key>
+	<true/>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDisplayName</key>
@@ -39,10 +61,14 @@
 	<string>$(FLUTTER_BUILD_NUMBER)</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>UIApplicationSupportsIndirectInputEvents</key>
+	<true/>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
 	<string>Main</string>
+	<key>UIStatusBarStyle</key>
+	<string></string>
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
@@ -58,9 +84,5 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
-	<key>CADisableMinimumFrameDurationOnPhone</key>
-	<true/>
-	<key>UIApplicationSupportsIndirectInputEvents</key>
-	<true/>
 </dict>
 </plist>
