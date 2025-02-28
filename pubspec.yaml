@@ -10,11 +10,7 @@ version: 1.0.0+1
 environment:
   sdk: '>=2.19.3 <3.0.0'
 
-# To automatically upgrade your package dependencies to the latest versions
-# consider running `flutter pub upgrade --major-versions`.
 
-# To see which dependencies have newer
-# versions available, run `flutter pub outdated`.
 dependencies:
   flutter:
     sdk: flutter
